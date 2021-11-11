@@ -378,35 +378,54 @@ public class Robot extends TimedRobot
       }
       
       theShooter.Shoot(1.0);
-      if(shooterSparkEnc1.getVelocity() > 1918 && shooterSparkEnc2.getVelocity() > 1918)
-      {
-        theConveyer.runConveyer(1, false);
-      }
-      else if((shooterSparkEnc1.getVelocity() > 1726 || shooterSparkEnc2.getVelocity() > 1726) || (shooterSparkEnc1.getVelocity() < 1918 || shooterSparkEnc2.getVelocity() < 1918))
-      {
-        theConveyer.runConveyer(.5, false);
-      }
+      // if(shooterSparkEnc1.getVelocity() > 1918 && shooterSparkEnc2.getVelocity() > 1918)
+      // {
+      //   theConveyer.runConveyer(1, false);
+      // }
+      // else if((shooterSparkEnc1.getVelocity() > 1726 || shooterSparkEnc2.getVelocity() > 1726) || (shooterSparkEnc1.getVelocity() < 1918 || shooterSparkEnc2.getVelocity() < 1918))
+      // {
+      //   theConveyer.runConveyer(.5, false);
+      // }
     }
     else
     { 
       theShooter.StopShooting();
-      theConveyer.stopConveyer();
+      //theConveyer.stopConveyer();
       wait = false;
     }
+
+    //Conveyor Code
+    if(cont1.getTriggerAxis(Hand.kRight)> 0.8) {
+      theConveyer.runConveyer(1, false);
+    }
+    else{
+      theConveyer.stopConveyer();
+    }
+
+    //Intake and Conveyor
+    if(cont1.getTriggerAxis(Hand.kLeft)> 0.8){
+      theIntake.startIntake(-0.3);
+      theConveyer.runConveyer(-1, false);
+    }
+    else{
+      theConveyer.stopConveyer();
+      theIntake.stopIntake();
+    }
+
 
     //Intake Code
     if(cont1.getBumper(Hand.kRight))
     {
       theIntake.startIntake(0.3);
-      theConveyer.runConveyer(1, true);
+      //theConveyer.runConveyer(1, true);
     }
     else
     {
       theIntake.stopIntake();
-      if(!cont1.getBumper(Hand.kLeft))
-      {
-        theConveyer.stopConveyer();
-      }
+      // if(!cont1.getBumper(Hand.kLeft))
+      // {
+      //   theConveyer.stopConveyer();
+      // }
     }
     //Actuator
     if(cont1.getXButtonPressed())

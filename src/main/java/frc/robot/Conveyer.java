@@ -67,7 +67,7 @@ public class Conveyer
         }
         if(!automatic)
         {
-            firstTalon.set(ControlMode.PercentOutput, Math.abs(power));
+            firstTalon.set(ControlMode.PercentOutput, power/*Math.abs(power)*/);
         }
     }
 
